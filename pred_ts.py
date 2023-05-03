@@ -137,7 +137,8 @@ class Model():
     def arima(self, order, wfv=True):
         """train the model and perform walk forward validation
 
-            Returns the test mae and the plot of the predictions , residuals.
+            Returns trained ARIMA model Should be assigned to a variable!!!!!!!
+            Test mae and the plot of the predictions , residuals and diagnostics plots.
 
         Args:
             order (tuple): the parameters of the model ==> order = (p, 0, q)
@@ -157,19 +158,30 @@ class Model():
                 history = history.append(y_test[next_pred.index])
 
             test_mae = mean_absolute_error(y_test, y_pred_wfv)
-
             print(f"Test MAE===>{test_mae} ")
+
+            # plot predictions
+
             df_pred = pd.DataFrame({"y_test": y_test, "y_pred": y_pred_wfv})
             fig = px.line(df_pred)
             fig.update_layout(title="Predictions Vs True Values",
                               xaxis_title="Date", yaxis_title="Price or Returns")
             fig.show()
+
+            # plot residuals
             df_resid = pd.DataFrame({"residuals": y_test-y_pred_wfv})
             fig = px.line(df_resid)
             fig.update_layout(title="Residuals", xaxis_title="Date",
                               yaxis_title="Price or Returns")
             fig.show()
+
+            # plot diagnostics
+            fig, ax = plt.subplots(figsize=(15, 12))
+            model.plot_diagnostics(fig=fig)
+            # print summary
             print(model.summary())
+
+            return model
 
         else:
             cut = cut
@@ -193,3 +205,5 @@ class Model():
             ax.legend()
             plt.show()
             print(model.summary())
+            return model
+        
