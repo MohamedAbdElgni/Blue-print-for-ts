@@ -7,7 +7,7 @@
             x=Model(data=df,freq='d',returns=False)
             x.eda()
             x.arima_mod_grid(p_param=range(0, 25, 8), q_param=range(0, 3, 1),cut=0.8)
-            x.arima(order=(8,0,0),wfv=True)
+            model=x.arima(order=(8,0,0),wfv=True) ==> Dont for git to assign it to Variable
 
             Returns:
                 the mae for the test set and the plot of the predictions and the residuals
