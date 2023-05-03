@@ -129,6 +129,8 @@ class Model():
         meandf = pd.DataFrame(grid_dict)
         # min in the dict
         fig = px.bar(meandf, orientation="v")
+        fig.update_layout(title="Grid Search for the best parameters",
+                          yaxis_title="MAE", xaxis_title="Parameters")
         fig.show()
         pp.pprint(grid_dict)
 
@@ -167,6 +169,7 @@ class Model():
             fig.update_layout(title="Residuals", xaxis_title="Date",
                               yaxis_title="Price or Returns")
             fig.show()
+            print(model.summary())
 
         else:
             cut = cut
@@ -189,3 +192,4 @@ class Model():
             ax.set(title='ARIMA', xlabel='Date', ylabel='Price')
             ax.legend()
             plt.show()
+            print(model.summary())
