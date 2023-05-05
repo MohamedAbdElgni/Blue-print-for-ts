@@ -39,15 +39,17 @@ pp = pprint.PrettyPrinter(indent=1)
 
 
 class Model():
-    
+
     def __init__(self, data, freq, returns=False):
-        """pass the series and the frequency of it
-        dont't to set the index to the time series
+        """Init the class for the model object to perform the predictions
 
         Args:
             data (pd.Series): 
             freq (str): d, h, m, s
             returns (bool, optional): perform the predictions on returns or on close price. Defaults to False.
+        Example:
+            df=pd.series()
+            x=Model(data=df,freq='d',returns=False)
         """
         self.freq = freq
         self.__Og_data = data.squeeze()
@@ -106,7 +108,8 @@ class Model():
         example:
             Model.arima_mod_grid(p_param=range(0, 25, 8), q_param=range(0, 3, 1),cut=0.8)
 
-        Hint: Q param Excluded because it takes a lot of time to compute and this is just a demo!!!!!
+        Hint: 
+            Q param Excluded because it takes a lot of time to compute and this is just a demo!!!!!
         """
 
         p_params = p_param
@@ -150,6 +153,9 @@ class Model():
 
         example:
             model=Model.arima(order=(8,0,0),wfv=True) ==> Dont for git to assign it to Variable
+
+        Hint: 
+            Q param Excluded because it takes a lot of time to compute and this is just a demo!!!!!
 
         """
 
