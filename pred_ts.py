@@ -39,11 +39,7 @@ pp = pprint.PrettyPrinter(indent=1)
 
 
 class Model():
-    """Model class for time series predictions 
-    perform eda, grid search for the best parameters and walk forward validation
-    model Arima,....
-    """
-
+    
     def __init__(self, data, freq, returns=False):
         """pass the series and the frequency of it
         dont't to set the index to the time series
@@ -74,6 +70,10 @@ class Model():
     def eda(self):
         """perform eda on the series
         Returns the Pacd and the Acf plots
+        Args:
+            None 
+        example:
+            Model.eda()
         """
 
         data = self.__wrangle()
@@ -97,12 +97,16 @@ class Model():
     def arima_mod_grid(self, p_param=range(0, 25, 8), q_param=range(0, 3, 1), cut=0.80):
         """perform grid search for the best parameters of the model
            and plot the results for the grid search
-           Returns the parameters and the mae for each combination
-
+           Returns:
+            the parameters and the mae for each combination
         Args:
-            p_param (_type_, range):  Defaults to range(0, 25, 8).
-            q_param (_type_, range): Defaults to range(0, 3, 1).
+            p_param (range, optional):  Defaults to range(0, 25, 8).
+            q_param (range, optional): Defaults to range(0, 3, 1).
             cut (float, optional): cutoff for the series. Defaults to 0.80.
+        example:
+            Model.arima_mod_grid(p_param=range(0, 25, 8), q_param=range(0, 3, 1),cut=0.8)
+
+        Hint: Q param Excluded because it takes a lot of time to compute and this is just a demo!!!!!
         """
 
         p_params = p_param
@@ -143,6 +147,10 @@ class Model():
         Args:
             order (tuple): the parameters of the model ==> order = (p, 0, q)
             wfv (bool, optional): perform walk forward val.. Defaults to True.
+
+        example:
+            model=Model.arima(order=(8,0,0),wfv=True) ==> Dont for git to assign it to Variable
+
         """
 
         self.__train_test_split(cut=self.cut)
@@ -206,4 +214,3 @@ class Model():
             plt.show()
             print(model.summary())
             return model
-        
