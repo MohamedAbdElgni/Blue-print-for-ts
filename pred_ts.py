@@ -10,7 +10,7 @@
             model=x.arima(order=(8,0,0),wfv=True) ==> Dont for git to assign it to Variable
 
             Returns:
-                the mae for the test set and the plot of the predictions and the residuals
+                the Mae for the test set and the plot of the predictions and the residuals
 """
 
 
